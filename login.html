@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f6f1" />
+    <meta name="description" content="Sign in to your shared eitWeb workout tracker." />
+    <title>Sign in — eitWeb</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/login.js"></script>
+  </head>
+  <body class="page page-login">
+    <header class="topbar login-topbar">
+      <a class="brand" href="login.html" aria-label="eitWeb sign in">
+        <span class="brand-mark" aria-hidden="true">e</span>
+        <span>eitWeb</span>
+      </a>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch color theme">
+        <span aria-hidden="true" class="theme-icon">☾</span>
+      </button>
+    </header>
+
+    <main class="login-main">
+      <section class="login-card" aria-labelledby="login-title">
+        <div class="login-sparkle" aria-hidden="true">✳</div>
+        <p class="eyebrow">Your shared space</p>
+        <h1 id="login-title">Welcome back</h1>
+        <p class="login-copy">Sign in to check in and see how you’re both doing.</p>
+        <form id="login-form" class="login-form">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="username" inputmode="email" placeholder="you@example.com" required />
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required />
+
+          <p class="notice form-notice" id="login-notice" role="alert" aria-live="assertive" hidden></p>
+          <button class="primary-button login-submit" id="login-submit" type="submit">
+            <span>Sign in</span><span aria-hidden="true">→</span>
+          </button>
+        </form>
+        <p class="login-footnote">This space is just for the two of you.</p>
+      </section>
+    </main>
+  </body>
+</html>
