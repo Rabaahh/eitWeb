@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Replace these two values with the account UIDs from Firebase Console.
+    // This keeps any other signed-in Firebase account out of the shared app.
+    function approvedCouple() {
+      return request.auth != null
+        && request.auth.uid in [
+          '2edjADpFjjOSXkedINflIQRWODg1',
+          'DAQ9B3X3MtP1tUtCYPu5jYlqP6n1'
+        ];
+    }
+
+    match /users/{userId} {
+      // Both signed-in people can read the two names. Profiles are managed in
+      // Firebase Console; clients cannot change them.
+      allow read: if approvedCouple();
+      allow write: if false;
+    }
+
+    match /workouts/{workoutId} {
+      // Signed-in users may see the shared workout history.
+      allow read: if approvedCouple();
+
+      // A user can create only their own uid_YYYY-MM-DD record. No updates are
+      // permitted, which keeps the record shape and owner fixed after creation.
+      allow create: if approvedCouple()
+        && request.resource.data.keys().hasAll(['uid', 'date', 'done'])
+        && request.resource.data.keys().hasOnly(['uid', 'date', 'done'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.date is string
+        && request.resource.data.date.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
+        && request.resource.data.done == true
+        && workoutId == request.auth.uid + '_' + request.resource.data.date;
+
+      allow update: if false;
+
+      // The record's stored owner, date, and document ID must all be this user.
+      allow delete: if approvedCouple()
+        && resource.data.uid == request.auth.uid
+        && resource.data.date is string
+        && workoutId == request.auth.uid + '_' + resource.data.date;
+    }
+  }
+}
