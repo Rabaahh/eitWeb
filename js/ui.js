@@ -101,7 +101,15 @@ function personCard(person, allRecords, currentUid, monthDate, busyUid) {
 }
 
 export function renderDashboard({ container, people, records, currentUid, months, busyUid, notice }) {
-  container.innerHTML = people.map((person) => {
+  // Put the signed-in person's card first on desktop and mobile, while each
+  // profile keeps its permanent ME or HER identity label.
+  const orderedPeople = [...people].sort((first, second) => {
+    if (first.uid === currentUid) return -1;
+    if (second.uid === currentUid) return 1;
+    return 0;
+  });
+
+  container.innerHTML = orderedPeople.map((person) => {
     const selectedMonth = months[person.uid] || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     return personCard(person, records, currentUid, selectedMonth, busyUid);
   }).join("");
