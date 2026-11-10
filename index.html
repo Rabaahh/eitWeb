@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f6f1" />
+    <meta name="description" content="A little workout progress, shared." />
+    <title>eitWeb — together, one day at a time</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body class="page page-dashboard">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="eitWeb home">
+        <span class="brand-mark" aria-hidden="true">e</span>
+        <span>eitWeb</span>
+      </a>
+      <div class="topbar-actions">
+        <span class="signed-in-as" id="signed-in-as"></span>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch color theme">
+          <span aria-hidden="true" class="theme-icon">☾</span>
+        </button>
+        <button class="text-button" id="sign-out" type="button">Sign out</button>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">A little progress, together</p>
+        <h1 id="page-title">Show up for yourself.<br /><span>Cheer each other on.</span></h1>
+        <p class="intro-copy">One check-in a day is all it takes.</p>
+      </section>
+
+      <p class="notice" id="dashboard-notice" role="status" aria-live="polite" hidden></p>
+      <section class="people-grid" id="people-grid" aria-label="Shared workout tracker">
+        <div class="loading-state" id="loading-state">
+          <span class="loading-dot" aria-hidden="true"></span>
+          <span>Getting your shared space ready…</span>
+        </div>
+      </section>
+      <p class="page-footnote">Every day is a fresh start.</p>
+    </main>
+  </body>
+</html>
